@@ -1,0 +1,22 @@
+Architecture du projet : 
+
+server.js : Point de lancement de l'appli. Utiliser pour importer tous les fichiers servers, modules, configurer les routes, ouvrir les connections à la base de donnée.
+
+node_modules: contiens les modules utilisés
+
+package.json : contiens des informations et surtout les dépendences et dev dependencies
+
+public/ tout ce qu'il y a dedans, sera mis à disposition publiquement par le serveur. On y range le Javascript, CSS, images et la templates qu'on veut utiliser avec le client ==> front end, appli ANGULAR, correspond à views
+
+Controllers/ : contiens notre controller, contien la grosse partie du backend, notament les routes
+
+
+Pour utiliser nodemon (en developpement, permet de ne pas relancer le server à chaque modif)
+
+1 - npm install nodemon --save-dev
+2 - dans package.json rajouter :  
+"scripts": {
+    "dev": "nodemon server.js"
+    	}
+3 - taper npm run dev
+4 - au lieu de lancer via la commande "node server.js", taper "nodemon server.js"
