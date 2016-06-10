@@ -149,15 +149,28 @@ router.get('/articles', function(req, res)
             {
                 res.send(err)
             }
-            article.title = req.body.title;
-            article.body = req.body.body;
+            if(req.body.title != null) {
+                article.title = req.body.title;
+            }
+            if(req.body.content != null){
+                article.content = req.body.content;
+            }
+
             article.save(function(err)
             {
                 if(err)
                 {
                     res.send(err)
                 }
-                res.json(article);
+                Article.find({'_id': req.params.article_id}, function(err, article)
+                {
+                    if (err)
+                    {
+                        res.send(err);
+                    } else {
+                        res.json(article);
+                    }
+                });
             });
         });
     });
@@ -190,11 +203,12 @@ router.get('/articles', function(req, res)
     // route pour créer un commentaire
     router.post('/articles/:article_id/comments', function(req, res)
     {
+        //console.log(req.body.content);
         // On utilise mongoose pour recup tous les commentaires dans la DB
         Comment.create(
             {
-                content : req.body.content,
                 author : req.body.author,
+                content : req.body.content,
                 post : req.params.article_id,
                 done : false
             }, function(err, comment)
@@ -205,11 +219,13 @@ router.get('/articles', function(req, res)
             }
             Comment.find({'post': req.params.article_id}, function(err, comments)
             {
-                if (err)
+                /*if (err)
                 {
                     res.send(err);
-                }
-                res.json(comments);
+                }*/
+
+                    res.json(comments);
+
             });
 
         });

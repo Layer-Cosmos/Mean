@@ -80,11 +80,10 @@ angular.module('myApp').controller('registerController',
 //var routeAppControllers = angular.module('routeAppControllers', []);
 
 
-angular.module('myApp').controller('homeController', ['$scope', '$http',
-    function ($scope, $http) {
+angular.module('myApp').controller('homeController', ['$scope', '$http', '$routeParams',
+    function ($scope, $http, $routeParams) {
 
         $scope.formData = {};
-
 
         // quand on arrive sur la page on affiche tous les articles
         $http.get('/user/articles')
@@ -95,10 +94,20 @@ angular.module('myApp').controller('homeController', ['$scope', '$http',
             .error(function (data) {
                 console.log('Error: ' + data);
             });
+        $http.get('/user/pseudo')
+            .success(function (data) {
+                $scope.users = data;
+                console.log(data);
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
 
         // quand on soumet un formulaire, on envoi le text à l'API
         $scope.createArticle = function () {
-           // $scope.formData.author = $scope.users.username.username;
+            //$scope.formData.author = $scope.users.username.username;
+            $scope.formData.author = $scope.users.username.username;
+            console.log($scope);
             $http.post('/user/articles', $scope.formData)
                 .success(function (data) {
                     //$scope.formData = {}; // clear the form so our user is ready to enter another
@@ -165,11 +174,13 @@ angular.module('myApp').controller('articleController', ['$scope', '$http', '$ro
             .error(function (data) {
                 console.log('Error: ' + data);
             });
-        $scope.createComment = function () {
+        $scope.createComment = function (id) {
+            console.log(id);
+            //console.log($scope.formData.content);
             $scope.formData.author = $scope.users.username.username;
             $http.post('/user/articles/' + id + '/comments', $scope.formData)
                 .success(function (data) {
-                    $scope.formData = {};
+                    //$scope.formData = {};
                     $scope.comments = data;
                     console.log(data);
                 })

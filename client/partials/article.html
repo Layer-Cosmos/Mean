@@ -8,9 +8,9 @@
                 <!-- Title -->
                 <div ng-repeat="article in articles">
                     <h1 ng-hide="checkedTitle">{{ article.title }} <input type="checkbox" ng-model="checkedTitle" aria-label="Toggle ngHide"></h1>
-                    <h2 ng-show="checkedTitle"><input type="text" class="form-control input-lg text-center" placeholder="titre de l'article" ng-model="formData.title"><input type="checkbox" ng-model="checkedTitle" aria-label="Toggle ngHide">
+                    <h2 ng-show="checkedTitle"><input type="text" class="form-control input-lg text-center" placeholder="titre de l'article" ng-model="formData.title" ng-value="article.title"><input type="checkbox" ng-model="checkedTitle" aria-label="Toggle ngHide">
                     <button type="submit" class="btn btn-primary btn-lg" ng-click="updateArticle(article._id)">Ajouter un article</button></h2>
-                </div>
+
 
 
 
@@ -36,9 +36,8 @@
 
                 <!-- Post Content -->
                 <div ng-repeat="article in articles">
-                    <p>{{ article.content }}</p>
                     <p ng-hide="checkedContent">{{ article.content }} <input type="checkbox" ng-model="checkedContent" aria-label="Toggle ngHide"></p>
-                    <p ng-show="checkedContent"><textarea class="form-control" ng-value="article.content" ng-model="formData.content"><input type="checkbox" ng-model="checkedContent" aria-label="Toggle ngHide"></textarea>
+                    <p ng-show="checkedContent"><textarea class="form-control" ng-model="formData.content"><input type="checkbox" ng-model="checkedContent" aria-label="Toggle ngHide"></textarea><input type="checkbox" ng-model="checkedContent" aria-label="Toggle ngHide"></p>
                         <button type="submit" class="btn btn-primary btn-lg" ng-click="updateArticle(article._id)">Ajouter un article</button></p>
                 </div>
 
@@ -47,13 +46,13 @@
                 <!-- Blog Comments -->
 
                 <!-- Comments Form -->
-                <div class="well">
+                <div class="well" ng-repeat="article in articles">
                     <h4>Leave a Comment:</h4>
-                    <form role="form">
+                    <form role="form" >
                         <div class="form-group">
                             <textarea class="form-control" rows="3" ng-model="formData.content"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg" ng-click="createComment()">Ajouter un commentaire</button>
+                        <button type="submit" class="btn btn-primary btn-lg" ng-click="createComment(article._id)">Ajouter un commentaire</button>
                     </form>
                 </div>
 
