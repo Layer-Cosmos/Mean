@@ -44,7 +44,7 @@ myApp.config(function ($routeProvider)
 myApp.run(function ($rootScope, $location, $route, AuthService) 
 {
   $rootScope.$on('$routeChangeStart',
-    function (event, next, current) 
+    function (event, next)
     {
       AuthService.getUserStatus()
       .then(function(){

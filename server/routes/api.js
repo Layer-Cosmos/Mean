@@ -10,7 +10,7 @@ var Comment = mongoose.model('Comment');
 
 router.post('/register', function(req, res) {
   User.register(new User({ username: req.body.username }),
-    req.body.password, function(err, account) {
+    req.body.password, function(err) {
     if (err) {
       return res.status(500).json({
         err: err
@@ -60,9 +60,12 @@ router.get('/status', function(req, res) {
       status: false
     });
   }
-  res.status(200).json({
-    status: true
-  });
+    res.status(200).json({
+          status: true,
+          username: req.user
+      });
+
+
 });
 
 router.get('/articles', function(req, res)
@@ -83,6 +86,7 @@ router.get('/articles', function(req, res)
     router.get('/articles/:article_id', function(req, res)
     {
         //console.log('salut');
+
         Article.find({'_id': req.params.article_id}, function(err, article)
         {
             if (err)

@@ -28,15 +28,15 @@
 
         <!-- HEADER AND NAVBAR -->
     <header>
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default" ng-controller="navController">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">MEAN Blog by ETNA</a>
+                <a class="navbar-brand" href="#/">MEAN Blog by ETNA</a>
             </div>
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#/home"><i class="fa fa-home"></i> Home</a></li>
-                <li><a href="#/administration"><i class="fa fa-shield"></i> Administration </a></li>
+                <li ng-show="isLoggedIn()"><a href="#/administration"><i class="fa fa-shield"></i> Administration </a></li>
                 <li><a href="#/articles"><i class="fa fa-shield"></i> Article </a></li>
                 <li><a href="#/register"><i class="fa fa-shield"></i> Register </a></li>
 

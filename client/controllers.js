@@ -13,12 +13,14 @@ angular.module('myApp').controller('loginController',
 
         // handle success
         .then(function () {
+          console.log($scope.loginForm.username);
           $location.path('/');
           $scope.disabled = false;
           $scope.loginForm = {};
         })
         // handle error
         .catch(function () {
+          console.log($scope.loginForm.username);
           $scope.error = true;
           $scope.errorMessage = "Invalid username and/or password";
           $scope.disabled = false;
@@ -118,6 +120,23 @@ angular.module('myApp').controller('homeController', ['$scope', '$http',
                     console.log('Error: ' + data);
                 });
         };
+    }
+]);
+
+angular.module('myApp').controller('navController', ['$scope', 'AuthService',
+    function ($scope, AuthService) {
+
+        AuthService.getUserStatus;
+    $scope.isLoggedIn = AuthService.isLoggedIn
+        console.log($scope.isLoggedIn);
+
+        /*AuthService.getUserStatus
+            .then(function(){
+                $scope.isLoggedIn = AuthService.isLoggedIn
+            });*/
+
+
+
     }
 ]);
 
