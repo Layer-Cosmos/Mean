@@ -9,7 +9,7 @@ var Comment = mongoose.model('Comment');
 
 
 router.post('/register', function(req, res) {
-  User.register(new User({ username: req.body.username }),
+  User.register(new User({ username: req.body.username , admin: false}),
     req.body.password, function(err) {
     if (err) {
       return res.status(500).json({
