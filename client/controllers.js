@@ -165,7 +165,7 @@ angular.module('myApp').controller('articleController', ['$scope', '$http', '$ro
                 console.log('Error: ' + data);
             });
         $scope.createComment = function () {
-            $http.post('/user/articles/' + id + '/comments', $scope.formData)
+            $http.post('/user/articles/' + id + '/comments', $scope.formData )
                 .success(function (data) {
                     //$scope.formData = {}; // clear the form so our user is ready to enter another
                     $scope.comments = data;

@@ -15,6 +15,7 @@
                     <p class="lead" ng-repeat="user in users">
                         by <a href="#">{{ user.username }}</a>
                     </p>
+                    {{ username.username }}
                 </div>
 
                 <hr>
@@ -44,6 +45,8 @@
                     <form role="form">
                         <div class="form-group">
                             <textarea class="form-control" rows="3" ng-model="formData.content"></textarea>
+                            <input type="text" ng-class="form-control" ng-model="formData.author" value="{{user.username.username}}">
+
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg" ng-click="createComment()">Ajouter un commentaire</button>
                     </form>
@@ -60,8 +63,7 @@
                     </a>
                     <div class="media-body">
                             <small>Ajouter par : {{ comment.author }}</small>
-                        </h4>
-                            {{ comment.content }}
+                            <p>{{ comment.content }}</p>
 
                     </div>
                 </div>
