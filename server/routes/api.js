@@ -61,9 +61,21 @@ router.get('/status', function(req, res) {
     });
   }
     res.status(200).json({
-          status: true,
-          username: req.user
+          status: true
       });
+
+
+});
+
+router.get('/pseudo', function(req, res) {
+    if (!req.isAuthenticated()) {
+        return res.status(200).json({
+            status: false
+        });
+    }
+    res.status(200).json({
+        username: req.user
+    });
 
 
 });

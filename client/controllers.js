@@ -147,6 +147,14 @@ angular.module('myApp').controller('articleController', ['$scope', '$http', '$ro
             .error(function (data) {
                 console.log('Error: ' + data);
             });
+        $http.get('/user/pseudo')
+            .success(function (data) {
+                $scope.users = data;
+                console.log(data);
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
         $http.get('/user/articles/' + id + '/comments')
             .success(function (data) {
                 $scope.comments = data;

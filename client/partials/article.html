@@ -12,8 +12,8 @@
 
 
                     <!-- Author -->
-                    <p class="lead">
-                        by <a href="#">{{ article.author }}</a>
+                    <p class="lead" ng-repeat="user in users">
+                        by <a href="#">{{ user.username }}</a>
                     </p>
                 </div>
 
