@@ -104,8 +104,9 @@ router.get('/articles', function(req, res)
             if (err)
             {
                 res.send(err);
+            } else {
+                res.json(article);
             }
-            res.json(article);
         });
     });
 
@@ -222,8 +223,9 @@ router.get('/articles', function(req, res)
             if (err)
             {
                 res.send(err);
+            } else {
+                res.json(comments);
             }
-            res.json(comments);
         });
     });
 
