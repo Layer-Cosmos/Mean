@@ -4,7 +4,8 @@ myApp.config(function ($routeProvider)
 {
   $routeProvider
       .when('/', {
-      templateUrl: 'partials/home.html',
+      templateUrl: 'partials/articles.html',
+      controller: 'homeController',
       access: {restricted: false}
     })
     .when('/login', {
@@ -35,10 +36,10 @@ myApp.config(function ($routeProvider)
       templateUrl: 'partials/article.html',
       controller: 'articleController',
       access: {restricted: false}
-    }); /*
+    })
     .otherwise({
       redirectTo: '/'
-    });*/
+    });
 });
 
 myApp.run(function ($rootScope, $location, $route, AuthService) 

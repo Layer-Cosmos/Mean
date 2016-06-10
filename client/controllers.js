@@ -98,7 +98,8 @@ angular.module('myApp').controller('homeController', ['$scope', '$http',
 
         // quand on soumet un formulaire, on envoi le text à l'API
         $scope.createArticle = function () {
-            $http.post('/blog/articles', $scope.formData)
+           // $scope.formData.author = $scope.users.username.username;
+            $http.post('/user/articles', $scope.formData)
                 .success(function (data) {
                     //$scope.formData = {}; // clear the form so our user is ready to enter another
                     $scope.articles = data;

@@ -1,7 +1,44 @@
 <div ng-show="error" class="alert alert-danger">{{errorMessage}}</div>
 
-<h1 ng-show="getUserStatus()">Yos!</h1>
+<h1 ng-show="getUserStatus()"></h1>
 
-<div ng-controller="logoutController">
-  <a ng-click='logout()' class="btn btn-default">Logout</a>
+<div class="container">
+
+    <div class="jumbotron text-center">
+        <h3>Nombre d'articles :<span class="label label-info">{{ articles.length }}</span></h3>
+    </div>
+
+    <!-- articles -->
+    <div id="article-list" class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+
+            <!-- on boucle sur les articles -->
+            <div class="checkbox" ng-repeat="article in articles">
+                <label>
+                    <a href="#/articles/{{article._id}}">{{ article.title }}</a>
+                </label>
+            </div>
+
+        </div>
+    </div>
+    <!-- test -->
+    <!-- Formulaire de création d'article -->
+    <div id="article-form" class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center">
+            <form>
+                <div class="form-group">
+
+                    <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+                    <input type="text" class="form-control input-lg text-center" placeholder="titre de l'article" ng-model="formData.title">
+                    <input type="text" class="form-control input-lg text-center" placeholder="auteur de l'article" ng-model="formData.author">
+                    <input type="text" class="form-control input-lg text-center" placeholder="contenu de l'article" ng-model="formData.content">
+
+                </div>
+
+                <!-- createToDo() WILL CREATE NEW TODOS -->
+                <button type="submit" class="btn btn-primary btn-lg" ng-click="createArticle()">Ajouter un article</button>
+            </form>
+        </div>
+    </div>
+
 </div>

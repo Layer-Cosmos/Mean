@@ -10,7 +10,7 @@
 
             <!-- on boucle sur les articles -->
             <div class="checkbox" ng-repeat="article in articles">
-                <label>
+                <label> 
                     <a href="#/articles/{{article._id}}">{{ article.title }}</a>
                 </label>
             </div>
@@ -26,7 +26,6 @@
 
                     <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
                     <input type="text" class="form-control input-lg text-center" placeholder="titre de l'article" ng-model="formData.title">
-                    <input type="text" class="form-control input-lg text-center" placeholder="auteur de l'article" ng-model="formData.author">
                     <input type="text" class="form-control input-lg text-center" placeholder="contenu de l'article" ng-model="formData.content">
 
                 </div>
