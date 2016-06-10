@@ -177,6 +177,16 @@ angular.module('myApp').controller('articleController', ['$scope', '$http', '$ro
                     console.log('Error: ' + data);
                 });
         };
+        $scope.updateArticle = function (id) {
+            $http.put('/user/articles/' + id, $scope.formData)
+                .success(function (data) {
+                    $scope.articles = data;
+                    console.log(data);
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
+        };
     }
 ]);
 
@@ -209,7 +219,17 @@ angular.module('myApp').controller('adminController', ['$scope', '$http',
         };
         // supprime un article après vérification
         $scope.deleteArticle = function (id) {
-            $http.delete('/blog/articles/' + id)
+            $http.delete('/user/articles/' + id)
+                .success(function (data) {
+                    $scope.articles = data;
+                    console.log(data);
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
+        };
+        $scope.updateArticle = function (id) {
+            $http.put('/user/articles/' + id, $scope.formData)
                 .success(function (data) {
                     $scope.articles = data;
                     console.log(data);

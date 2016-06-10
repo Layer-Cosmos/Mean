@@ -7,13 +7,17 @@
 
                 <!-- Title -->
                 <div ng-repeat="article in articles">
-                    <h1>{{ article.title }}</h1>
+                    <h1 ng-hide="checkedTitle">{{ article.title }} <input type="checkbox" ng-model="checkedTitle" aria-label="Toggle ngHide"></h1>
+                    <h2 ng-show="checkedTitle"><input type="text" class="form-control input-lg text-center" placeholder="titre de l'article" ng-model="formData.title"><input type="checkbox" ng-model="checkedTitle" aria-label="Toggle ngHide">
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="updateArticle(article._id)">Ajouter un article</button></h2>
+                </div>
+
 
 
 
                     <!-- Author -->
                     <p class="lead">
-                        by <a href="#">{{ users.username.username }}</a>
+                        by <a href="#">{{ article.author }}</a>
                     </p>
 
                 </div>
@@ -33,6 +37,9 @@
                 <!-- Post Content -->
                 <div ng-repeat="article in articles">
                     <p>{{ article.content }}</p>
+                    <p ng-hide="checkedContent">{{ article.content }} <input type="checkbox" ng-model="checkedContent" aria-label="Toggle ngHide"></p>
+                    <p ng-show="checkedContent"><textarea class="form-control" ng-value="article.content" ng-model="formData.content"><input type="checkbox" ng-model="checkedContent" aria-label="Toggle ngHide"></textarea>
+                        <button type="submit" class="btn btn-primary btn-lg" ng-click="updateArticle(article._id)">Ajouter un article</button></p>
                 </div>
 
                 <hr>
