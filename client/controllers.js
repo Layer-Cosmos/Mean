@@ -98,7 +98,7 @@ angular.module('myApp').controller('homeController', ['$scope', '$http',
 
         // quand on soumet un formulaire, on envoi le text à l'API
         $scope.createArticle = function () {
-            $http.post('/user/articles', $scope.formData)
+            $http.post('/blog/articles', $scope.formData)
                 .success(function (data) {
                     //$scope.formData = {}; // clear the form so our user is ready to enter another
                     $scope.articles = data;
@@ -129,13 +129,6 @@ angular.module('myApp').controller('navController', ['$scope', 'AuthService',
         AuthService.getUserStatus;
     $scope.isLoggedIn = AuthService.isLoggedIn
         console.log($scope.isLoggedIn);
-
-        /*AuthService.getUserStatus
-            .then(function(){
-                $scope.isLoggedIn = AuthService.isLoggedIn
-            });*/
-
-
 
     }
 ]);
@@ -194,7 +187,7 @@ angular.module('myApp').controller('adminController', ['$scope', '$http',
 
         // quand on soumet un formulaire, on envoi le text à l'API
         $scope.createArticle = function () {
-            $http.post('/user/articles', $scope.formData)
+            $http.post('/blog/articles', $scope.formData)
                 .success(function (data) {
                     //$scope.formData = {}; // clear the form so our user is ready to enter another
                     $scope.articles = data;
@@ -206,7 +199,7 @@ angular.module('myApp').controller('adminController', ['$scope', '$http',
         };
         // supprime un article après vérification
         $scope.deleteArticle = function (id) {
-            $http.delete('/user/articles/' + id)
+            $http.delete('/blog/articles/' + id)
                 .success(function (data) {
                     $scope.articles = data;
                     console.log(data);
