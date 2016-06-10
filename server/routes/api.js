@@ -40,15 +40,23 @@ router.post('/login', function(req, res, next) {
           err: 'Could not log in user'
         });
       }
-      res.status(200).json({
-        status: 'Login successful!'
-      });
+        else {
+          res.status(200).json({
+              status: 'Login successful!'
+          });
+      }
+
     });
   })(req, res, next);
 });
 
 router.get('/logout', function(req, res) {
   req.logout();
+    if (!req.isAuthenticated()) {
+        return res.status(200).json({
+            status: false
+        });
+    }
   res.status(200).json({
     status: 'Bye!'
   });
@@ -61,7 +69,7 @@ router.get('/status', function(req, res) {
     });
   }
     res.status(200).json({
-          status: true
+          status: true,
       });
 
 
@@ -76,8 +84,6 @@ router.get('/pseudo', function(req, res) {
     res.status(200).json({
         username: req.user
     });
-
-
 });
 
 router.get('/articles', function(req, res)
@@ -208,7 +214,7 @@ router.get('/articles', function(req, res)
         Comment.create(
             {
                 author : req.body.author,
-                content : req.body.content,
+                text : req.body.text,
                 post : req.params.article_id,
                 done : false
             }, function(err, comment)

@@ -1,3 +1,23 @@
+<header>
+    <nav class="navbar navbar-default" ng-controller="navController">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/">MEAN Blog by ETNA</a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/home"><i class="fa fa-home"></i> Home</a></li>
+                <li ng-controller="articleController" ng-show="users.username.admin" ><a href="#/administration"><i class="fa fa-shield"></i>Administration</a></li>
+                <li><a href="#/articles"><i class="fa fa-shield"></i> Articles </a></li>
+                <li><a ng-hide="isLoggedIn()" href="#/register"><i class="fa fa-shield"></i> Register </a></li>
+                <li><a ng-hide="isLoggedIn()" href="#/login"><i class="fa fa-shield"></i> Login </a></li>
+                <li><a ng-controller="logoutController" ng-click='logout()' ng-show="isLoggedIn()" href="#/logout"><i class="fa fa-shield"></i> Logout </a></li>
+                <li><a ng-controller="homeController" ng-show="isLoggedIn()"><i class="fa fa-shield"></i> {{users.username.username}} </a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
 <!-- Page Content -->
     <div class="container">
 
@@ -8,8 +28,11 @@
                 <!-- Title -->
                 <div ng-repeat="article in articles">
                     <h1 ng-hide="checkedTitle">{{ article.title }} <input type="checkbox" ng-model="checkedTitle" aria-label="Toggle ngHide"></h1>
-                    <h2 ng-show="checkedTitle"><input type="text" class="form-control input-lg text-center" placeholder="titre de l'article" ng-model="formData.title" ng-value="article.title"><input type="checkbox" ng-model="checkedTitle" aria-label="Toggle ngHide">
-                    <button type="submit" class="btn btn-primary btn-lg" ng-click="updateArticle(article._id)">Ajouter un article</button></h2>
+                    <h2 ng-show="checkedTitle">
+                        <input type="text" class="form-control input-lg text-center" placeholder="titre de l'article" ng-model="formData.title" ng-value="article.title">
+                        <input type="checkbox" ng-model="checkedTitle" aria-label="Toggle ngHide">
+                        <button type="submit" class="btn btn-primary btn-lg" ng-click="updateArticle(article._id)">Ajouter un article</button></h2>
+
 
 
 
@@ -37,7 +60,7 @@
                 <!-- Post Content -->
                 <div ng-repeat="article in articles">
                     <p ng-hide="checkedContent">{{ article.content }} <input type="checkbox" ng-model="checkedContent" aria-label="Toggle ngHide"></p>
-                    <p ng-show="checkedContent"><textarea class="form-control" ng-model="formData.content"><input type="checkbox" ng-model="checkedContent" aria-label="Toggle ngHide"></textarea><input type="checkbox" ng-model="checkedContent" aria-label="Toggle ngHide"></p>
+                    <p ng-show="checkedContent"><textarea class="form-control" ng-model="formData.content"><input type="checkbox" ng-model="checkedContent" aria-label="Toggle ngHide"></textarea><input type="checkbox" ng-model="checkedContent" aria-label="Toggle ngHide">
                         <button type="submit" class="btn btn-primary btn-lg" ng-click="updateArticle(article._id)">Ajouter un article</button></p>
                 </div>
 
@@ -50,7 +73,7 @@
                     <h4>Leave a Comment:</h4>
                     <form role="form" >
                         <div class="form-group">
-                            <textarea class="form-control" rows="3" ng-model="formData.content"></textarea>
+                            <textarea class="form-control" rows="3" ng-model="formData.text"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg" ng-click="createComment(article._id)">Ajouter un commentaire</button>
                     </form>
@@ -67,7 +90,7 @@
                     </a>
                     <div class="media-body">
                             <small>Ajouter par : {{ comment.author }}</small>
-                            <p>{{ comment.content }}</p>
+                            <p>{{ comment.text }}</p>
 
                     </div>
                 </div>

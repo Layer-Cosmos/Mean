@@ -1,6 +1,6 @@
 angular.module('myApp').controller('loginController',
   ['$scope', '$location', 'AuthService',
-  function ($scope, $location, AuthService) {
+  function ($scope, $location, AuthService, $route) {
 
     $scope.login = function () {
 
@@ -17,6 +17,7 @@ angular.module('myApp').controller('loginController',
           $location.path('/');
           $scope.disabled = false;
           $scope.loginForm = {};
+          $route.reload();
         })
         // handle error
         .catch(function () {
@@ -32,14 +33,16 @@ angular.module('myApp').controller('loginController',
 
 angular.module('myApp').controller('logoutController',
   ['$scope', '$location', 'AuthService',
-  function ($scope, $location, AuthService) {
+  function ($scope, $location, AuthService, $route) {
 
     $scope.logout = function () {
-
+        $scope.formData = {};
+        $scope = {};
       // call logout from service
       AuthService.logout()
         .then(function () {
           $location.path('/login');
+            $route.reload();
         });
 
     };
@@ -133,12 +136,18 @@ angular.module('myApp').controller('homeController', ['$scope', '$http', '$route
     }
 ]);
 
-angular.module('myApp').controller('navController', ['$scope', 'AuthService',
-    function ($scope, AuthService) {
+angular.module('myApp').controller('navController', ['$scope', 'AuthService', '$http',
+    function ($scope, AuthService, $http) {
 
         AuthService.getUserStatus;
     $scope.isLoggedIn = AuthService.isLoggedIn
-        console.log($scope.isLoggedIn);
+        //console.log("top");
+        $http.get('/user/pseudo')
+            .success(function (data) {
+                $scope.users = data;
+                console.log(data);
+            })
+        //console.log($scope.isLoggedIn);
 
     }
 ]);
@@ -149,14 +158,7 @@ angular.module('myApp').controller('articleController', ['$scope', '$http', '$ro
         var id = $routeParams.id;
 
         // on recupere un seule article via l'id
-        $http.get('/user/articles/' + id)
-            .success(function (data) {
-                $scope.articles = data;
-                console.log(data);
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
+
         $http.get('/user/pseudo')
             .success(function (data) {
                 $scope.users = data;
@@ -165,15 +167,25 @@ angular.module('myApp').controller('articleController', ['$scope', '$http', '$ro
             .error(function (data) {
                 console.log('Error: ' + data);
             });
-        $http.get('/user/articles/' + id + '/comments')
-            .success(function (data) {
-                $scope.comments = data;
-                console.log(data);
+        if(id) {
+            $http.get('/user/articles/' + id)
+                .success(function (data) {
+                    $scope.articles = data;
+                    console.log(data);
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
+            $http.get('/user/articles/' + id + '/comments')
+                .success(function (data) {
+                    $scope.comments = data;
+                    console.log(data);
 
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
+        }
         $scope.createComment = function (id) {
             console.log(id);
             //console.log($scope.formData.content);

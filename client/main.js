@@ -25,7 +25,7 @@ myApp.config(function ($routeProvider)
     .when('/administration', {
       templateUrl: 'partials/administration.html',
       controller: 'adminController',
-      access: {restricted: false}
+      access: {restricted: true}
     })
     .when('/articles', {
       templateUrl: 'partials/articles.html',
@@ -42,7 +42,7 @@ myApp.config(function ($routeProvider)
     });
 });
 
-myApp.run(function ($rootScope, $location, $route, AuthService) 
+myApp.run(function ($rootScope, $location, $route, AuthService)
 {
   $rootScope.$on('$routeChangeStart',
     function (event, next)
@@ -51,8 +51,8 @@ myApp.run(function ($rootScope, $location, $route, AuthService)
       .then(function(){
         if (next.access.restricted && !AuthService.isLoggedIn())
         {
-          $location.path('/login');
-          $route.reload();
+            $location.path('/login');
+            $route.reload();
         }
       });
   });
