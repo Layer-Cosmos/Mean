@@ -40,7 +40,7 @@
                 <li><a href="#/articles"><i class="fa fa-shield"></i> Article </a></li>
                 <li><a ng-hide="isLoggedIn()" href="#/register"><i class="fa fa-shield"></i> Register </a></li>
                 <li><a ng-hide="isLoggedIn()" href="#/login"><i class="fa fa-shield"></i> Login </a></li>
-                <li><a ng-show="isLoggedIn()" href="#/logout"><i class="fa fa-shield"></i> Logout </a></li>
+                <li><a ng-controller="logoutController" ng-click='logout()' ng-show="isLoggedIn()" href="#/logout"><i class="fa fa-shield"></i> Logout </a></li>
 
 
 
